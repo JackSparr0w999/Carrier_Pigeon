@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, Settings, Share2, Home as HomeIcon, Scan, Send as SendIcon, Download, FileText } from 'lucide-react';
+import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 
 // Importa i TUOI componenti
@@ -90,7 +91,7 @@ const AppLayout = ({ children, currentPage, onNavigate, isMobile }) => {
           </div>
         </div>
       )}
-      <SpeedInsights /> 
+      
     </div>
   );
 };
@@ -138,11 +139,15 @@ function App() {
   };
 
   return (
-    <div className={isMobile ? "max-w-md mx-auto bg-white shadow-xl" : "min-h-screen bg-gray-50"}>
-      <AppLayout currentPage={currentPage} onNavigate={setCurrentPage} isMobile={isMobile}>
-        {renderCurrentPage()}
-      </AppLayout>
-    </div>
+    <>
+      <div className={isMobile ? "max-w-md mx-auto bg-white shadow-xl" : "min-h-screen bg-gray-50"}>
+        <AppLayout currentPage={currentPage} onNavigate={setCurrentPage} isMobile={isMobile}>
+          {renderCurrentPage()}
+        </AppLayout>
+      </div>
+      <Analytics />
+      <SpeedInsights /> 
+    </>  
   );
 }
 
